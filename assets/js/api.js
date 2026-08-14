@@ -16,6 +16,18 @@ const API = (() => {
   const hasBackend = () => Boolean(CONFIG.API_BASE);
   const url = (path) => CONFIG.API_BASE.replace(/\/$/, "") + path;
 
+  // Fetch with a timeout so a sleeping/slow backend can't hang the page —
+  // on timeout we throw and callers fall back to the local seed data.
+  async function fetchWithTimeout(resource, options = {}, ms = 7000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), ms);
+    try {
+      return await fetch(resource, { ...options, signal: controller.signal });
+    } finally {
+      clearTimeout(id);
+    }
+  }
+
   // Some columns may arrive as JSON strings from SQLite — parse defensively.
   function maybeParse(v) {
     if (typeof v !== "string") return v;
@@ -47,7 +59,7 @@ const API = (() => {
   async function getGuides() {
     if (!hasBackend()) return GUIDES_SEED;
     try {
-      const res = await fetch(url("/api/guides"));
+      const res = await fetchWithTimeout(url("/api/guides"));
       if (!res.ok) throw new Error("HTTP " + res.status);
       const data = await res.json();
       const list = Array.isArray(data) ? data : data.guides || [];
@@ -61,7 +73,7 @@ const API = (() => {
   async function getGuide(slug) {
     if (!hasBackend()) return GUIDES_SEED.find((g) => g.slug === slug);
     try {
-      const res = await fetch(url("/api/guides/" + encodeURIComponent(slug)));
+      const res = await fetchWithTimeout(url("/api/guides/" + encodeURIComponent(slug)));
       if (!res.ok) throw new Error("HTTP " + res.status);
       return normalizeGuide(await res.json());
     } catch (err) {

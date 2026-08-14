@@ -17,7 +17,7 @@ const CONFIG = {
   // To pin the live backend permanently, replace the default "" with the Render URL,
   // e.g. "https://sahi-tareeqa-api.onrender.com".
   API_BASE: (() => {
-    const DEFAULT = "";
+    const DEFAULT = "https://sahi-tareeqa-api-production-a935.up.railway.app";
     try {
       const fromQuery = new URLSearchParams(location.search).get("api");
       if (fromQuery !== null) {
