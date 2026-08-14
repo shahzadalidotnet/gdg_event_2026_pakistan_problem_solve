@@ -170,6 +170,24 @@ ul.tips li svg { width:16px; height:16px; color:#b8860b; flex:none; margin-top:3
 .confirm-box .cb-left strong { display:block; font-size:15px; }
 .confirm-box .cb-left span { font-size:13px; color:var(--muted); }
 
+/* In-app report form */
+.report-form { background:var(--card); border:1px solid var(--line); border-left:4px solid var(--gold); border-radius:var(--radius); padding:20px 24px; margin-top:12px; box-shadow:var(--shadow); display:grid; gap:12px; }
+.report-form[hidden] { display:none; }
+.report-form label { display:grid; gap:6px; font-size:13px; font-weight:700; color:var(--ink); }
+.report-form textarea, .report-form input { font:inherit; font-weight:400; font-size:14px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; outline:none; background:var(--paper); color:var(--ink); width:100%; }
+.report-form textarea { resize:vertical; }
+.report-form textarea:focus, .report-form input:focus { border-color:var(--green-500); box-shadow:0 0 0 3px rgba(18,129,61,.12); }
+.report-form .rf-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.report-form .rf-actions { display:flex; gap:10px; margin-top:2px; }
+@media (max-width:520px){ .report-form .rf-row { grid-template-columns:1fr; } }
+
+/* Toasts */
+#toasts { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; gap:10px; z-index:1000; width:min(92vw,440px); pointer-events:none; }
+.toast { pointer-events:auto; padding:13px 16px; border-radius:12px; font-size:14px; font-weight:600; color:#fff; box-shadow:0 8px 24px rgba(16,38,27,.18); opacity:0; transform:translateY(12px); transition:opacity .25s ease, transform .25s ease; }
+.toast.show { opacity:1; transform:translateY(0); }
+.toast-success { background:var(--green-500); }
+.toast-error { background:var(--old); }
+
 /* Vision / roadmap page */
 #vision { display:none; padding:24px 0 60px; }
 .vision-hero { padding: 6px 0 2px; }

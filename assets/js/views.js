@@ -119,13 +119,40 @@ function renderDetail(g) {
     <div class="report">
       <div class="r-text">
         <strong>Spotted something out of date?</strong>
-        <span>Fees and steps change. Email us what you found on the ground — it's reviewed and fixed for everyone.</span>
+        <span>Fees and steps change. Tell us what you found on the ground — it's reviewed and fixed for everyone.</span>
       </div>
-      <a class="btn" href="${reportUrl}">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" fill="none"/><path d="M22 6l-10 7L2 6"/></svg>
-        Report by email
-      </a>
+      ${API.hasBackend()
+        ? `<button class="btn" onclick="toggleReportForm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Report outdated info
+          </button>`
+        : `<a class="btn" href="${reportUrl}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" fill="none"/><path d="M22 6l-10 7L2 6"/></svg>
+            Report by email
+          </a>`}
     </div>
+
+    ${API.hasBackend() ? `
+    <form id="reportForm" class="report-form" hidden onsubmit="submitReportForm(event, '${g.slug}')">
+      <label>What's outdated or different on the ground? *
+        <textarea name="message" rows="3" required placeholder="e.g. The fee is now Rs. 2000, not 1500; counter closes at 12pm."></textarea>
+      </label>
+      <div class="rf-row">
+        <label>When did you visit?
+          <input type="date" name="visitedOn" />
+        </label>
+        <label>Your city
+          <input type="text" name="city" placeholder="e.g. Islamabad" />
+        </label>
+      </div>
+      <label>Email (optional — if you'd like a reply)
+        <input type="email" name="email" placeholder="you@example.com" />
+      </label>
+      <div class="rf-actions">
+        <button type="submit" class="btn" id="reportSubmitBtn">Submit report</button>
+        <button type="button" class="btn ghost" onclick="toggleReportForm()">Cancel</button>
+      </div>
+    </form>` : ""}
   `;
 }
 
