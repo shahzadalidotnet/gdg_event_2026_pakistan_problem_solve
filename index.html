@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sahi Tareeqa — Verified Pakistani Govt Processes</title>
+<meta name="description" content="The right way to do it. Step-by-step guides for CNIC, passport, driving license, degree attestation and more — every guide dated, sourced, and community-verified." />
+<style>
+  :root {
+    --green: #01411c;
+    --green-600: #0a5c2b;
+    --green-500: #12813d;
+    --green-tint: #eaf3ec;
+    --paper: #f7f8f6;
+    --card: #ffffff;
+    --ink: #16261b;
+    --muted: #5c6b60;
+    --line: #e2e8e3;
+    --gold: #e6b422;
+    --fresh: #12813d;
+    --stale: #d98b00;
+    --old: #c0392b;
+    --shadow: 0 1px 2px rgba(16,38,27,.06), 0 8px 24px rgba(16,38,27,.06);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--green-500); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header.site {
+    background: var(--green);
+    color: #fff;
+    border-bottom: 4px solid var(--gold);
+  }
+  .site-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; max-width: 1080px; margin: 0 auto; gap: 16px; flex-wrap: wrap;}
+  .brand { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+  .brand .mark {
+    width: 40px; height: 40px; border-radius: 10px; background: #fff;
+    display: grid; place-items: center; flex: none;
+  }
+  .brand .mark svg { width: 26px; height: 26px; }
+  .brand h1 { font-size: 20px; margin: 0; letter-spacing: .2px; line-height: 1.1; }
+  .brand .tagline { font-size: 12px; color: #bfe0c8; margin: 0; }
+  .badge-pk {
+    font-size: 12px; font-weight: 600; color: #fff;
+    border: 1px solid rgba(255,255,255,.35); padding: 6px 12px; border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* Hero */
+  .hero { padding: 34px 0 10px; }
+  .hero h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 8px; letter-spacing: -.5px; }
+  .hero p { color: var(--muted); font-size: 16px; margin: 0 0 20px; max-width: 640px; }
+  .trust-row { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+  .trust-chip { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+  .trust-chip svg { width: 16px; height: 16px; color: var(--green-500); flex: none; }
+
+  /* Controls */
+  .controls { display: flex; gap: 12px; margin: 24px 0 8px; flex-wrap: wrap; }
+  .search {
+    flex: 1; min-width: 220px; display: flex; align-items: center; gap: 10px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+    box-shadow: var(--shadow);
+  }
+  .search svg { width: 18px; height: 18px; color: var(--muted); flex: none; }
+  .search input { border: none; outline: none; font-size: 15px; width: 100%; background: transparent; color: var(--ink); }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter {
+    border: 1px solid var(--line); background: var(--card); color: var(--muted);
+    padding: 10px 14px; border-radius: 999px; font-size: 13px; cursor: pointer; font-weight: 600;
+  }
+  .filter.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  /* Grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin: 20px 0 40px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; cursor: pointer; box-shadow: var(--shadow); transition: transform .12s ease, box-shadow .12s ease;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(16,38,27,.10), 0 16px 40px rgba(16,38,27,.10); }
+  .card .org { font-size: 12px; font-weight: 700; color: var(--green-500); text-transform: uppercase; letter-spacing: .5px; }
+  .card h3 { margin: 0; font-size: 18px; letter-spacing: -.2px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .card .meta { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 10px; }
+
+  /* Freshness badge */
+  .fresh-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .fresh-badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .fresh-badge.ok { background: #e7f3ec; color: #0c6a30; } .fresh-badge.ok .dot { background: var(--fresh); }
+  .fresh-badge.warn { background: #fdf3e0; color: #9a6300; } .fresh-badge.warn .dot { background: var(--stale); }
+  .fresh-badge.old { background: #fdecea; color: #a33025; } .fresh-badge.old .dot { background: var(--old); }
+  .card .arrow { color: var(--muted); font-size: 18px; }
+
+  /* Detail view */
+  #detail { display: none; padding: 24px 0 60px; }
+  .back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-weight: 600; font-size: 14px; cursor: pointer; margin-bottom: 18px; background:none; border:none; padding:0; }
+  .back:hover { color: var(--green); }
+  .detail-head { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+  .detail-head .org { font-size: 12px; font-weight: 700; color: var(--green-500); text-transform: uppercase; letter-spacing: .5px; }
+  .detail-head h2 { margin: 6px 0 14px; font-size: 26px; letter-spacing: -.4px; }
+  .verify-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .verify-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--muted); }
+  .verify-item svg { width: 15px; height: 15px; color: var(--green-500); }
+
+  .quickfacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 14px; margin: 18px 0; }
+  .fact { background: var(--green-tint); border-radius: 12px; padding: 14px 16px; }
+  .fact .label { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--green-600); font-weight: 700; margin-bottom: 4px; }
+  .fact .value { font-size: 15px; font-weight: 600; color: var(--ink); }
+
+  .section { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-top: 18px; }
+  .section h3 { margin: 0 0 16px; font-size: 18px; display:flex; align-items:center; gap:8px; }
+  .section h3 svg { width: 18px; height: 18px; color: var(--green-500); }
+
+  ul.docs { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  ul.docs li { display: flex; gap: 10px; align-items: flex-start; font-size: 15px; }
+  ul.docs li .check { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--green-500); flex: none; margin-top: 2px; }
+
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
+  ol.steps li { counter-increment: step; display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px dashed var(--line); }
+  ol.steps li:last-child { border-bottom: none; }
+  ol.steps li::before {
+    content: counter(step); flex: none; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--green); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 14px;
+  }
+  ol.steps .step-title { font-weight: 600; }
+  ol.steps .step-detail { color: var(--muted); font-size: 14px; }
+
+  .offices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .office-chip { background: var(--green-tint); color: var(--green-600); font-size: 13px; padding: 6px 12px; border-radius: 999px; font-weight: 600; }
+
+  .report {
+    margin-top: 18px; background: #fffdf5; border: 1px dashed var(--gold); border-radius: var(--radius);
+    padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .report .r-text strong { display: block; font-size: 15px; }
+  .report .r-text span { font-size: 13px; color: var(--muted); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff;
+    padding: 11px 18px; border-radius: 10px; font-weight: 600; font-size: 14px; border: none; cursor: pointer; white-space: nowrap;
+  }
+  .btn:hover { background: var(--green-600); text-decoration: none; }
+  .btn.ghost { background: #fff; color: var(--green); border: 1px solid var(--green); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* Timings + reality check */
+  .callout { display:flex; gap:12px; align-items:flex-start; background:#eef6f0; border:1px solid #cfe6d6; border-radius:12px; padding:14px 16px; margin-top:14px; }
+  .callout svg { width:20px; height:20px; color:var(--green-500); flex:none; margin-top:2px; }
+  .callout .c-label { font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--green-600); font-weight:700; }
+  .callout .c-value { font-size:15px; font-weight:600; }
+  .reality { background:#fffdf5; border:1px solid var(--gold); border-left:5px solid var(--gold); border-radius:var(--radius); padding:20px 24px; margin-top:18px; box-shadow: var(--shadow); }
+  .reality h3 { margin:0 0 6px; font-size:17px; display:flex; align-items:center; gap:8px; }
+  .reality h3 svg { width:18px; height:18px; color:#b8860b; }
+  .reality .r-sub { color:var(--muted); font-size:13px; margin:0 0 14px; }
+  ul.tips { list-style:none; padding:0; margin:0; display:grid; gap:11px; }
+  ul.tips li { display:flex; gap:10px; font-size:14.5px; align-items:flex-start; }
+  ul.tips li svg { width:16px; height:16px; color:#b8860b; flex:none; margin-top:3px; }
+
+  /* Header nav */
+  .header-right { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .nav-link { color:#fff; font-weight:600; font-size:14px; cursor:pointer; border-bottom:2px solid transparent; padding-bottom:2px; }
+  .nav-link:hover { text-decoration:none; border-bottom-color: var(--gold); }
+
+  /* Community confirm */
+  .confirm-box { margin-top:18px; background:#eef6f0; border:1px solid #cfe6d6; border-radius:var(--radius); padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .confirm-box .cb-left strong { display:block; font-size:15px; }
+  .confirm-box .cb-left span { font-size:13px; color:var(--muted); }
+
+  /* Vision / roadmap page */
+  #vision { display:none; padding:24px 0 60px; }
+  .vision-hero { padding: 6px 0 2px; }
+  .vision-hero h2 { font-size: clamp(24px, 4vw, 32px); margin:0 0 8px; letter-spacing:-.5px; }
+  .vision-hero p { color: var(--muted); font-size:16px; margin:0; max-width:680px; }
+  .phase { background: var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; box-shadow:var(--shadow); margin-top:16px; }
+  .phase-head { display:flex; align-items:center; gap:12px; margin-bottom:4px; flex-wrap:wrap; }
+  .phase-head h3 { margin:0; font-size:18px; }
+  .tag { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; padding:4px 10px; border-radius:999px; }
+  .tag.done { background:#e7f3ec; color:#0c6a30; }
+  .tag.next { background:#eaf1fb; color:#1a56c4; }
+  .tag.later { background:#f3eefb; color:#6b3fb5; }
+  .phase .p-sub { color:var(--muted); font-size:13.5px; margin:0 0 10px; }
+  .phase ul { margin:0; padding:0; list-style:none; display:grid; gap:9px; }
+  .phase ul li { display:flex; gap:10px; font-size:14.5px; align-items:flex-start; }
+  .phase ul li svg { width:16px; height:16px; flex:none; margin-top:3px; color:var(--green-500); }
+
+  /* Footer */
+  footer.site { border-top: 1px solid var(--line); background: #fff; margin-top: 20px; }
+  .foot-inner { padding: 30px 20px; max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; }
+  .foot-inner h4 { margin: 0 0 8px; font-size: 14px; }
+  .foot-inner p, .foot-inner li { color: var(--muted); font-size: 13px; }
+  .roadmap { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+  .roadmap li { display: flex; gap: 8px; align-items: flex-start; }
+  .roadmap li .n { color: var(--green-500); font-weight: 700; flex:none; }
+  .copyright { text-align: center; color: var(--muted); font-size: 12px; padding: 16px; border-top: 1px solid var(--line); }
+  .empty { text-align: center; color: var(--muted); padding: 50px 0; }
+  @media (max-width: 640px) {
+    .foot-inner { grid-template-columns: 1fr; }
+    .report { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-inner">
+    <div class="brand" onclick="goHome()">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#01411c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Sahi Tareeqa</h1>
+        <p class="tagline">The right way to do it — dated &amp; sourced.</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <a class="nav-link" onclick="goVision()">Vision &amp; Roadmap</a>
+      <span class="badge-pk">🇵🇰 Pakistan @79 · GDG Live</span>
+    </div>
+  </div>
+</header>
+
+<!-- HOME VIEW -->
+<main id="home">
+  <div class="wrap">
+    <section class="hero">
+      <h2>Government processes, verified &amp; up to date.</h2>
+      <p>YouTube videos go stale and blogs never tell you <em>when</em> they were written. Every guide here shows the date it was last verified, links to the official source, and can be corrected by anyone who spots an error.</p>
+      <div class="trust-row">
+        <div class="trust-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>
+          Every guide is date-stamped
+        </div>
+        <div class="trust-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+          Linked to official sources
+        </div>
+        <div class="trust-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Corrected by citizens
+        </div>
+      </div>
+    </section>
+
+    <div class="controls">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="searchInput" type="text" placeholder="Search — CNIC, license, passport, degree…" oninput="render()" />
+      </div>
+    </div>
+    <div class="filters" id="filters"></div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+</main>
+
+<!-- DETAIL VIEW -->
+<section id="detail">
+  <div class="wrap" id="detailContent"></div>
+</section>
+
+<!-- VISION / ROADMAP VIEW -->
+<section id="vision">
+  <div class="wrap" id="visionContent"></div>
+</section>
+
+<footer class="site">
+  <div class="foot-inner">
+    <div>
+      <h4>Why Sahi Tareeqa exists</h4>
+      <p>Pakistanis waste hours chasing outdated instructions for basic paperwork — CNIC, passport, driving license, degree attestation. The information exists, but it's scattered, undated, and you never know if it's still true. Sahi Tareeqa is one trusted, community-maintained portal where every process carries a verification date and a source.</p>
+      <p style="margin-top:12px;color:#8a978d;font-size:12px;">Built for GDG Live Pakistan · Pakistan @79. Content shown is community-maintained sample data — always confirm fees on the official portal before you go.</p>
+    </div>
+    <div>
+      <h4>How it stays fresh</h4>
+      <ul class="roadmap">
+        <li><span class="n">1.</span> <span><strong>Seeded</strong> by contributors from lived experience.</span></li>
+        <li><span class="n">2.</span> <span><strong>Corrected</strong> by citizens — one tap to report an outdated step.</span></li>
+        <li><span class="n">3.</span> <span><strong>Monitored</strong> by AI (roadmap): a monthly job re-checks each guide against official sources and flags changes.</span></li>
+        <li><span class="n">4.</span> <span><strong>Verified</strong> by humans before anything is published.</span></li>
+      </ul>
+      <p style="margin-top:12px;"><a onclick="goVision()" style="cursor:pointer;font-weight:600;">See the full vision &amp; roadmap →</a></p>
+    </div>
+  </div>
+  <div class="copyright">© 2026 Sahi Tareeqa · A GDG Live Pakistan project · Made with 💚 in Pakistan</div>
+</footer>
+
+<script>
+/* ---------- Config ---------- */
+const ADMIN_EMAIL = "shahzadalidotnet@gmail.com"; // "Report outdated" emails land here
+const TODAY = new Date("2026-08-14");
+
+/* ---------- Data (community-maintained sample) ---------- */
+const GUIDES = [
+  {
+    slug: "cnic-renewal", org: "NADRA", title: "Renew your CNIC (Smart Card)",
+    summary: "Renew an expired Computerised National Identity Card — online or in person.",
+    lastVerified: "2026-08-14",
+    source: { label: "id.nadra.gov.pk", url: "https://id.nadra.gov.pk/" },
+    fee: "Smart CNIC: Rs. 1000 (Normal) · Rs. 2000 (Urgent) · Rs. 3000 (Executive) · + Rs. 165 courier",
+    time: "Normal 30 · Urgent 20 · Executive 10 working days",
+    documents: [
+      "Your existing CNIC (original) — bring it even if expired",
+      "One recent passport-size photo with a white background",
+      "Supporting document ONLY if details changed — marriage certificate (name), utility bill (address), or court order",
+      "A mobile number registered in your own name (for SMS tracking)"
+    ],
+    steps: [
+      { title: "Choose online or in-person", detail: "The Pak-ID app / id.nadra.gov.pk works if your name, father's name and date of birth are unchanged. Any change to your particulars needs an in-person NRC visit." },
+      { title: "Start the application", detail: "Online: log in with your CNIC and upload a fresh photo. In-person: collect a token at any NADRA Registration Center (NRC) or Mega Center." },
+      { title: "Give biometrics (in-person only)", detail: "Fingerprints and a live photo are re-captured at the counter. Skipped for pure online renewals where data is unchanged." },
+      { title: "Pick a processing speed & pay", detail: "Choose Normal / Urgent / Executive and pay by card online or at the counter. Keep the receipt and your token number." },
+      { title: "Track your card", detail: "SMS your 13-digit number to 8300, or track live in the Pak-ID app." },
+      { title: "Collect or receive it", detail: "Delivered to your address by courier, or collect from the NRC on the due date if you chose in-person pickup." }
+    ],
+    offices: ["Any NADRA Mega Center", "NADRA Registration Center (NRC)", "Pak-ID app (online)"],
+    hours: "Mega Centers: Mon–Sat 8AM–8PM · NRCs: Mon–Fri 9AM–5PM · Pak-ID app 24/7",
+    collection: "Not same-day. The card is couriered to your address or collected from the NRC on the date printed on your token — only the paper token is issued same-day.",
+    tips: [
+      "If nothing has changed, renew fully online via the Pak-ID app — no queue and the card is delivered home.",
+      "Token counters usually stop issuing new tokens ~1 hour before closing — reach early.",
+      "Bring the original CNIC even for a renewal; a photocopy alone is refused at the counter.",
+      "Smart Card fees start at Rs. 1000 — older guides quoting Rs. 750 are the outdated non-smart rate.",
+      "The Executive counter is a separate, faster queue if you pay the top fee."
+    ]
+  },
+  {
+    slug: "itp-license", org: "Islamabad Traffic Police (ITP)", title: "Get a driving licence (Islamabad)",
+    summary: "Learner + permanent car/bike driving licence in ICT.",
+    lastVerified: "2026-08-08",
+    source: { label: "islamabadtrafficpolice.gov.pk", url: "https://islamabadtrafficpolice.gov.pk/" },
+    fee: "Learner ~Rs. 60 · Permanent (car) ~Rs. 1000–1150 (fee + test)",
+    time: "Learner: same day · Permanent: after 42-day learner period",
+    documents: ["Original CNIC + photocopy", "Learner permit (for permanent licence)", "Passport-size photographs", "Medical fitness certificate", "Blood group report"],
+    steps: [
+      { title: "Apply for a learner permit", detail: "Visit ITP licensing office (H-11 / F-6) with CNIC; pay challan at the bank counter." },
+      { title: "Wait the mandatory 42 days", detail: "You must hold the learner permit for at least six weeks before the driving test." },
+      { title: "Book a test slot", detail: "Book online at the ITP portal or in person; bring learner permit + documents." },
+      { title: "Pass theory + practical test", detail: "Signs/signals quiz, then the on-track driving test with an examiner." },
+      { title: "Biometric + fee, then collect", detail: "Give biometrics, pay the licence fee, and the card is printed/couriered." }
+    ],
+    offices: ["ITP Licensing Office, H-11", "ITP Office F-6 Markaz", "ITP online portal"],
+    hours: "Licensing offices: Mon–Fri 9AM–3PM (test slots fill by noon)",
+    collection: "Learner permit is issued same-day. The permanent licence card is couriered or collected after processing.",
+    tips: [
+      "Google timings are often wrong — the driving-test track stops taking new candidates around 12:30 PM.",
+      "Carry the original medical certificate; a photocopy is not accepted.",
+      "Wear closed shoes and be ready to actually drive on the day you book the practical test."
+    ]
+  },
+  {
+    slug: "hec-attestation", org: "HEC", title: "Attest your degree (HEC e-attestation)",
+    summary: "Higher Education Commission degree, transcript & certificate attestation — now digital.",
+    lastVerified: "2026-08-14",
+    source: { label: "eservices.hec.gov.pk", url: "https://eservices.hec.gov.pk/" },
+    fee: "Rs. 3000 per document (degree, transcript, provisional certificate or equivalence letter)",
+    time: "10–15 working days total — ~5–8 days university verification + 3–5 days HEC review",
+    documents: [
+      "Scanned copy (PDF/JPEG) of each degree, transcript & certificate — Matric onwards",
+      "Original documents (bring to your Regional Centre appointment)",
+      "CNIC / passport copy",
+      "Printed e-portal appointment confirmation",
+      "Remove any plastic lamination before scanning/attesting"
+    ],
+    steps: [
+      { title: "Create an account on the HEC e-portal", detail: "Sign up at eservices.hec.gov.pk (open 24/7) and complete your academic profile — list every qualification from Matric onwards." },
+      { title: "Upload your documents", detail: "Attach scanned PDFs/JPEGs of each degree, transcript and certificate you want attested." },
+      { title: "Pay the fee (Rs. 3000 per document)", detail: "Pay via 1-Link — mobile banking, ATM, or any bank branch using the generated consumer number." },
+      { title: "University verification", detail: "HEC sends your records to the awarding university to confirm — usually 5–8 working days and out of your hands." },
+      { title: "Book your appointment", detail: "Once verified, you get an SMS/email to pick a date and an HEC Regional Centre (Islamabad, Karachi, Lahore, etc.)." },
+      { title: "Get your e-attestation", detail: "After final review an e-attestation certificate is issued — download it from your dashboard; SMS/email confirms." }
+    ],
+    offices: ["HEC Regional Centre Islamabad", "HEC Lahore / Karachi / Peshawar / Quetta", "HEC e-portal (online)"],
+    hours: "e-portal 24/7 · Regional Centres: Mon–Fri 9AM–4PM",
+    collection: "Now largely digital — the e-attestation certificate is downloaded from your HEC dashboard. A centre visit (biometrics/originals) is only required if your case needs it.",
+    tips: [
+      "The fee is now Rs. 3000 per document — guides quoting Rs. 800 are out of date.",
+      "Remove plastic lamination before scanning/attesting — stamps won't stick to plastic.",
+      "List every qualification from Matric onwards or the application stalls at verification.",
+      "University verification is the slow, out-of-your-control part — apply well before any deadline.",
+      "Bring at least 2 photocopies of every document if you're called to a Regional Centre."
+    ]
+  },
+  {
+    slug: "passport-renewal", org: "DGI&P", title: "Renew / apply for a passport",
+    summary: "Machine-readable / e-passport from Immigration & Passports.",
+    lastVerified: "2026-07-20",
+    source: { label: "dgip.gov.pk", url: "https://dgip.gov.pk/" },
+    fee: "Varies by pages & speed — e.g. 36-page normal ~Rs. 4500; urgent higher",
+    time: "Normal 10 working days · Urgent 4 working days · Fast-track 2 days",
+    documents: ["Original CNIC + copy", "Previous passport (for renewal)", "Online appointment / fee challan", "Photograph as per DGIP spec"],
+    steps: [
+      { title: "Apply online or book an appointment", detail: "Use the DGIP online portal (onlinemrp) or book a slot at a passport office." },
+      { title: "Pay the passport fee", detail: "Pay at a designated bank or online; keep the challan/receipt." },
+      { title: "Visit for biometrics & photo", detail: "Attend your slot for fingerprints, photo and data verification." },
+      { title: "Complete verification", detail: "Interview/verification counter confirms your particulars." },
+      { title: "Collect or receive by courier", detail: "Track via the portal; collect from office or receive by courier." }
+    ],
+    offices: ["Regional Passport Office (RPO)", "Executive Passport Centers", "DGIP online (onlinemrp.nadra.gov.pk)"],
+    hours: "RPOs: Mon–Fri 8AM–1:30PM for new tokens (biometrics run later)",
+    collection: "Not same-day — track online and collect from the office or receive by courier per your chosen speed.",
+    tips: [
+      "Reach before 8 AM at busy offices — the daily token quota can finish in the first two hours.",
+      "Your photo must match DGIP spec (no glasses, plain background) or it's re-taken there.",
+      "Carry the original CNIC of your father/spouse if names need cross-verification."
+    ]
+  },
+  {
+    slug: "fbr-ntn", org: "FBR", title: "Register for NTN & become a filer",
+    summary: "Get a free National Tax Number on IRIS, then file to appear on the ATL.",
+    lastVerified: "2026-08-14",
+    source: { label: "iris.fbr.gov.pk", url: "https://iris.fbr.gov.pk/" },
+    fee: "Free — NTN registration costs nothing. Late filers pay an ATL surcharge (Rs. 1000 for individuals).",
+    time: "NTN: under 15 minutes online · ATL status: 7–30 days after filing (list updates every Monday)",
+    documents: [
+      "CNIC (13 digits, no dashes)",
+      "Mobile number registered in your own name (CNIC)",
+      "Personal email address",
+      "Bank account details (IBAN)",
+      "Employer / business or salary details (needed for the return)"
+    ],
+    steps: [
+      { title: "Open the IRIS portal", detail: "Go to iris.fbr.gov.pk and click 'Registration for Unregistered Person' on the homepage." },
+      { title: "Enter your details", detail: "Provide CNIC, address, mobile and email. A verification code is sent to your number and your email." },
+      { title: "Verify with the SMS + email codes", detail: "Enter both codes to activate your IRIS account and set a password." },
+      { title: "NTN is generated automatically", detail: "Your NTN is issued inside IRIS — usually under 15 minutes if your CNIC is properly linked with NADRA." },
+      { title: "File your income tax return", detail: "Submit the annual return (form 114). This separate step is what actually makes you a 'filer'. TY2026 deadline: 30 Sep 2026." },
+      { title: "Check the Active Taxpayer List", detail: "Your name appears on the ATL 7–30 days later; the list refreshes every Monday." }
+    ],
+    offices: ["IRIS online portal", "FBR Tax Facilitation Centre", "Tax Asaan mobile app"],
+    hours: "IRIS online: 24/7 · Facilitation Centres: Mon–Fri 9AM–5PM",
+    collection: "Fully online — the NTN certificate is downloaded from IRIS. There is nothing to collect in person.",
+    tips: [
+      "Your mobile number and email must be registered in your own name (CNIC) to receive the codes.",
+      "Getting an NTN is NOT the same as being a filer — you become a filer only after you file the return.",
+      "The Active Taxpayer List updates only on Mondays, so your filer status won't reflect instantly.",
+      "TY2026 filing deadline is 30 September 2026 — filing late triggers the ATL surcharge.",
+      "Lower withholding tax on property, banking and vehicles is the main reason to become a filer."
+    ]
+  },
+  {
+    slug: "domicile", org: "District Administration", title: "Get a Domicile certificate",
+    summary: "Proof of permanent residence, required for jobs & admissions.",
+    lastVerified: "2026-02-15",
+    source: { label: "Your District / DC Office", url: "https://islamabad.gov.pk/" },
+    fee: "Rs. 200–500 (varies by district) + affidavit stamp paper",
+    time: "7–15 working days after submission",
+    documents: ["CNIC of applicant + father/husband", "Form-B / matric certificate (birth/residence proof)", "2 passport-size photos", "Affidavit on stamp paper", "Utility bill / proof of residence"],
+    steps: [
+      { title: "Collect the domicile form", detail: "Obtain form from the DC / Deputy Commissioner office or district website." },
+      { title: "Attach documents & affidavit", detail: "Prepare the affidavit on stamp paper and attach residence proofs." },
+      { title: "Get attestation", detail: "Have documents attested by a Grade-17+ officer as required." },
+      { title: "Submit at the DC office", detail: "Submit the file and pay the fee; collect your receipt/token." },
+      { title: "Collect the certificate", detail: "Return on the given date to collect the issued domicile." }
+    ],
+    offices: ["Deputy Commissioner (DC) Office", "Assistant Commissioner Office", "District facilitation counter"],
+    hours: "DC / AC offices: Mon–Fri 9AM–2PM for submissions",
+    collection: "Not same-day — collect on the date printed on your receipt (usually 7–15 days later).",
+    tips: [
+      "Requirements vary by district — call your specific DC office before preparing the file.",
+      "The affidavit must be on the correct value of stamp paper, attested by an oath commissioner.",
+      "Bring the original CNIC of your father/husband, not just yours — it's checked for lineage."
+    ]
+  },
+  {
+    slug: "ibcc-attestation", org: "IBCC", title: "Attest / get equivalence (IBCC)",
+    summary: "Inter Boards Coordination Commission — attestation & equivalence of certificates.",
+    lastVerified: "2026-08-14",
+    source: { label: "ibcc.edu.pk", url: "https://ibcc.edu.pk/" },
+    fee: "Attestation: ~Rs. 1200 per original certificate · ~Rs. 800 per photocopy · Board verification ~Rs. 600 + Rs. 300 courier. Equivalence is a separate, higher fee.",
+    time: "Attestation: same day (in person) · Board verification & equivalence: several working days",
+    documents: [
+      "Printed application form from the IBCC portal",
+      "Original certificate + one photocopy of each",
+      "Additional photocopies of every document to be attested",
+      "Photocopies of the student's and father's CNIC / B-Form",
+      "Paid fee challan or online payment receipt",
+      "For equivalence: original foreign qualification + transcripts"
+    ],
+    steps: [
+      { title: "Get board verification first", detail: "Before IBCC can attest, your matric/intermediate certificate must be verified by the issuing education board (~Rs. 600 + courier)." },
+      { title: "Apply & book on the IBCC portal", detail: "Fill the application at ibcc.edu.pk, book an appointment, and print the form." },
+      { title: "Pay the fee", detail: "Pay the per-document attestation (or equivalence) fee via bank/approved channel and keep the challan." },
+      { title: "Submit at the IBCC office (or by courier)", detail: "Hand over originals + photocopies + form + challan; the counter verifies and issues a receipt." },
+      { title: "Processing", detail: "Attestation is same-day; equivalence goes for evaluation and takes several working days." },
+      { title: "Collect or receive by courier", detail: "For attestation, collect the same day (usually evening); for equivalence, collect on the printed date or by courier." }
+    ],
+    offices: ["IBCC Regional Office (Islamabad / Lahore / Karachi / etc.)", "IBCC online portal", "Issuing education board (for prior verification)"],
+    hours: "Regional offices: Mon–Fri 9AM–1PM for submissions (verify on-site — not Google's listing)",
+    collection: "Submit in the morning, then come back the SAME DAY around 3–5 PM to collect attested docs. Equivalence takes several days — collect on the printed date or by courier.",
+    tips: [
+      "Attestation ≠ equivalence: attestation stamps your Pakistani certificate; equivalence converts a FOREIGN qualification to its Pakistani equivalent. They are separate applications with different fees.",
+      "Board verification comes first — IBCC won't attest a matric/inter certificate the board hasn't verified.",
+      "Google's timing is frequently wrong — counters stop accepting new files ~1 hour before closing.",
+      "You submit in the morning and collect the same evening — plan for two trips in one day, not one.",
+      "Bring photocopies of BOTH the student's and father's CNIC even when the online list is vague.",
+      "Fees are per document and add up fast — ~Rs. 1200 per original + ~Rs. 800 per photocopy."
+    ]
+  }
+];
+
+/* ---------- Freshness logic ---------- */
+function monthsSince(dateStr) {
+  const d = new Date(dateStr);
+  return (TODAY - d) / (1000 * 60 * 60 * 24 * 30.44);
+}
+function freshness(dateStr) {
+  const m = monthsSince(dateStr);
+  if (m <= 3) return { cls: "ok", label: "Verified" };
+  if (m <= 6) return { cls: "warn", label: "Check again" };
+  return { cls: "old", label: "May be outdated" };
+}
+function fmtDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+}
+
+/* ---------- Filters ---------- */
+let activeOrg = "All";
+function orgList() {
+  return ["All", ...Array.from(new Set(GUIDES.map(g => g.org)))];
+}
+function renderFilters() {
+  document.getElementById("filters").innerHTML = orgList().map(o =>
+    `<button class="filter ${o === activeOrg ? "active" : ""}" onclick="setOrg('${o.replace(/'/g,"\\'")}')">${o}</button>`
+  ).join("");
+}
+function setOrg(o) { activeOrg = o; renderFilters(); render(); }
+
+/* ---------- Render home grid ---------- */
+function render() {
+  const q = (document.getElementById("searchInput").value || "").toLowerCase();
+  const list = GUIDES.filter(g => {
+    const matchOrg = activeOrg === "All" || g.org === activeOrg;
+    const hay = (g.title + " " + g.org + " " + g.summary).toLowerCase();
+    return matchOrg && hay.includes(q);
+  });
+  const grid = document.getElementById("grid");
+  if (!list.length) { grid.innerHTML = `<div class="empty">No guides match “${q}”. Try “CNIC”, “licence”, or “passport”.</div>`; return; }
+  grid.innerHTML = list.map(g => {
+    const f = freshness(g.lastVerified);
+    return `
+      <div class="card" onclick="openGuide('${g.slug}')">
+        <div class="org">${g.org}</div>
+        <h3>${g.title}</h3>
+        <p>${g.summary}</p>
+        <div class="meta">
+          <span class="fresh-badge ${f.cls}"><span class="dot"></span>${f.label} · ${fmtDate(g.lastVerified)}</span>
+          <span class="arrow">→</span>
+        </div>
+      </div>`;
+  }).join("");
+}
+
+/* ---------- Render detail ---------- */
+function openGuide(slug) { location.hash = "/guide/" + slug; }
+function goHome() { location.hash = ""; }
+function goVision() { location.hash = "/vision"; }
+
+function confirmAccurate(slug) {
+  const key = "confirm_" + slug;
+  const n = parseInt(localStorage.getItem(key) || "0", 10) + 1;
+  localStorage.setItem(key, String(n));
+  const c = document.getElementById("confirmCount");
+  const b = document.getElementById("confirmBtn");
+  if (c) c.textContent = `✓ Confirmed accurate by ${n} ${n === 1 ? "person" : "people"} recently. In the full version this refreshes the “last verified” date automatically.`;
+  if (b) { b.textContent = "Thanks for confirming!"; b.disabled = true; b.style.opacity = "0.6"; b.style.cursor = "default"; }
+}
+
+function renderDetail(slug) {
+  const g = GUIDES.find(x => x.slug === slug);
+  if (!g) { goHome(); return; }
+  const f = freshness(g.lastVerified);
+  const subject = encodeURIComponent(`Sahi Tareeqa — Outdated: ${g.title} (${g.org})`);
+  const body = encodeURIComponent(
+    `Guide: ${g.title}\n` +
+    `Organisation: ${g.org}\n` +
+    `Currently shows "Last verified": ${fmtDate(g.lastVerified)}\n\n` +
+    `What is outdated or different on the ground?\n\n\n` +
+    `When did you visit: \nYour city: \n`
+  );
+  const reportUrl = `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;
+  const confirmed = parseInt(localStorage.getItem("confirm_" + g.slug) || "0", 10);
+  document.getElementById("detailContent").innerHTML = `
+    <button class="back" onclick="goHome()">← All processes</button>
+    <div class="detail-head">
+      <div class="org">${g.org}</div>
+      <h2>${g.title}</h2>
+      <div class="verify-row">
+        <span class="fresh-badge ${f.cls}"><span class="dot"></span>${f.label}</span>
+        <span class="verify-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+          Last verified ${fmtDate(g.lastVerified)}
+        </span>
+        <span class="verify-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+          Source: <a href="${g.source.url}" target="_blank" rel="noopener">${g.source.label}</a>
+        </span>
+      </div>
+      <div class="quickfacts">
+        <div class="fact"><div class="label">Government fee</div><div class="value">${g.fee}</div></div>
+        <div class="fact"><div class="label">Processing time</div><div class="value">${g.time}</div></div>
+        <div class="fact"><div class="label">Office hours (verified)</div><div class="value">${g.hours}</div></div>
+      </div>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+        <div><div class="c-label">How collection works</div><div class="c-value">${g.collection}</div></div>
+      </div>
+    </div>
+
+    ${g.tips && g.tips.length ? `
+    <div class="reality">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg>Reality check — what actually happens</h3>
+      <p class="r-sub">The stuff the official site won't tell you, from people who've been there.</p>
+      <ul class="tips">${g.tips.map(t => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>${t}</span></li>`).join("")}</ul>
+    </div>` : ""}
+
+    <div class="section">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Documents you need</h3>
+      <ul class="docs">${g.documents.map(d => `<li><span class="check"></span><span>${d}</span></li>`).join("")}</ul>
+    </div>
+
+    <div class="section">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Step by step</h3>
+      <ol class="steps">${g.steps.map(s => `<li><div><div class="step-title">${s.title}</div><div class="step-detail">${s.detail}</div></div></li>`).join("")}</ol>
+    </div>
+
+    <div class="section">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Where to go</h3>
+      <div class="offices">${g.offices.map(o => `<span class="office-chip">${o}</span>`).join("")}</div>
+    </div>
+
+    <div class="confirm-box">
+      <div class="cb-left">
+        <strong>Did this match reality when you did it?</strong>
+        <span id="confirmCount">${confirmed > 0
+          ? `✓ Confirmed accurate by ${confirmed} ${confirmed === 1 ? "person" : "people"} recently — this keeps the “verified” date fresh.`
+          : `Community confirmations keep the “last verified” date fresh — a preview of the roadmap.`}</span>
+      </div>
+      <button class="btn ghost" id="confirmBtn" onclick="confirmAccurate('${g.slug}')">👍 I did this recently — still accurate</button>
+    </div>
+
+    <div class="report">
+      <div class="r-text">
+        <strong>Spotted something out of date?</strong>
+        <span>Fees and steps change. Email us what you found on the ground — it's reviewed and fixed for everyone.</span>
+      </div>
+      <a class="btn" href="${reportUrl}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" fill="none"/><path d="M22 6l-10 7L2 6"/></svg>
+        Report by email
+      </a>
+    </div>
+  `;
+}
+
+/* ---------- Vision / roadmap ---------- */
+function bullets(items) {
+  return `<ul>${items.map(t => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>${t}</span></li>`).join("")}</ul>`;
+}
+function renderVision() {
+  document.getElementById("visionContent").innerHTML = `
+    <button class="back" onclick="goHome()">← Back to processes</button>
+    <div class="vision-hero">
+      <h2>From MVP to Pakistan's trusted process portal</h2>
+      <p>What you're using today is a working MVP — hand-verified guides, each dated and sourced. Here's how it becomes a living service that stays fresh <em>without</em> waiting for information to break.</p>
+    </div>
+
+    <div class="callout" style="margin-top:18px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>
+      <div><div class="c-label">Our core principle</div><div class="c-value">We don't wait for a guide to fail, get reported, then fixed. We <strong>proactively confirm freshness</strong> — through citizens, community signals, and AI — before anything goes stale.</div></div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 1 — The MVP</h3><span class="tag done">Shipped · live now</span></div>
+      <p class="p-sub">Everything the judges are using right now.</p>
+      ${bullets([
+        "Hand-verified guides for NADRA, HEC, FBR, IBCC, ITP, Passport &amp; Domicile",
+        "Every guide is date-stamped and linked to its official source",
+        "“Reality check” tips — the on-the-ground truth official sites never mention",
+        "One-tap “Report by email” and a live community-confirmation preview"
+      ])}
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 2 — Capture &amp; track reports</h3><span class="tag next">Next</span></div>
+      <p class="p-sub">Turn one-off emails into a tracked, measurable feedback loop.</p>
+      ${bullets([
+        "Built-in “Report issue” form — no leaving the site, no email client",
+        "A backend database storing every report with a status: new → reviewing → fixed",
+        "Automatic email/notification to the admin the moment a report arrives",
+        "“Reported by N people” shown on the guide so hot issues surface themselves"
+      ])}
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 3 — Admin, without redeploys</h3><span class="tag next">Next</span></div>
+      <p class="p-sub">Update content in seconds — no code, no deployment.</p>
+      ${bullets([
+        "Secure admin login with dedicated dashboard screens",
+        "View every guide and every incoming report in one place",
+        "Edit a guide's fees, steps or documents and publish instantly",
+        "Content served from the database/CMS — the site never needs a re-deploy to update"
+      ])}
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>Phase 4 — Proactive freshness</h3><span class="tag later">The differentiator</span></div>
+      <p class="p-sub">Freshness earned continuously — not just after something breaks.</p>
+      ${bullets([
+        "Community confirmation: citizens who just completed a process confirm it still works — “Confirmed accurate by 24 people this month”",
+        "Recent confirmations automatically refresh the “Last verified” date — freshness from real visits, not failure reports",
+        "AI re-verification: a monthly job cross-checks each guide against official sources and flags drift for a human to approve",
+        "The result — no manually calling institutions, no waiting for a guide to fail first"
+      ])}
+    </div>
+
+    <div class="reality" style="margin-top:22px;">
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z"/></svg>How a guide stays “verified”</h3>
+      <p class="r-sub">Three independent freshness signals, combined:</p>
+      ${(() => {
+        const tips = [
+          "<strong>Citizens</strong> report anything wrong the moment they hit it in person.",
+          "<strong>Community</strong> confirmations from recent visitors keep accurate guides marked fresh.",
+          "<strong>AI</strong> systematically re-checks every guide against official sources each month.",
+          "A <strong>human</strong> approves every change before it goes live — nothing auto-publishes a government fee."
+        ];
+        return `<ul class="tips">${tips.map(t => `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span>${t}</span></li>`).join("")}</ul>`;
+      })()}
+    </div>
+
+    <div class="callout" style="margin-top:18px;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <div><div class="c-label">For the judges</div><div class="c-value">Everything under “Phase 1” is fully working in the page you're using today. Phases 2–4 are the roadmap that keeps it alive after the hackathon.</div></div>
+    </div>
+
+    <button class="back" style="margin:22px 0 0;" onclick="goHome()">← Back to processes</button>
+  `;
+}
+
+/* ---------- Router ---------- */
+function route() {
+  const hash = location.hash.replace(/^#/, "");
+  const guide = hash.match(/^\/guide\/(.+)$/);
+  const home = document.getElementById("home");
+  const detail = document.getElementById("detail");
+  const vision = document.getElementById("vision");
+  home.style.display = "none"; detail.style.display = "none"; vision.style.display = "none";
+  if (guide) { detail.style.display = "block"; renderDetail(guide[1]); }
+  else if (hash === "/vision") { vision.style.display = "block"; renderVision(); }
+  else { home.style.display = "block"; }
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
+/* ---------- Init ---------- */
+renderFilters();
+render();
+route();
+</script>
+</body>
+</html>
