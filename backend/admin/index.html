@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sahi Tareeqa Admin</title>
+  <style>
+    :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17251b; background: #f2f6f3; }
+    body { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 5rem; }
+    h1, h2 { line-height: 1.15; }
+    section { background: white; border: 1px solid #d9e4dc; border-radius: 12px; padding: 1.25rem; margin: 1rem 0; box-shadow: 0 4px 18px #16391f0a; }
+    label { display: block; font-weight: 650; margin: .75rem 0 .3rem; }
+    input, select, textarea, button { box-sizing: border-box; font: inherit; border: 1px solid #aebbb1; border-radius: 7px; padding: .6rem .7rem; }
+    input, textarea { width: 100%; }
+    textarea { min-height: 430px; font-family: ui-monospace, monospace; font-size: .88rem; }
+    button { cursor: pointer; background: #12622b; color: white; border-color: #12622b; margin: .35rem .35rem .35rem 0; }
+    button.secondary { background: white; color: #12622b; }
+    button.danger { background: #a12626; border-color: #a12626; }
+    .row { display: flex; gap: .75rem; align-items: end; flex-wrap: wrap; }
+    .row > * { flex: 1 1 230px; }
+    .report { border-top: 1px solid #e2e8e3; padding: 1rem 0; }
+    .report:first-child { border-top: 0; }
+    .muted { color: #5c6b60; font-size: .9rem; }
+    .status { min-height: 1.5rem; color: #8b2525; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <h1>Sahi Tareeqa Admin</h1>
+  <p class="muted">Review citizen reports and edit live API guide content without redeploying.</p>
+
+  <section id="loginSection">
+    <h2>Sign in</h2>
+    <form id="loginForm">
+      <label for="password">Admin password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Sign in</button>
+    </form>
+  </section>
+
+  <main id="workspace" hidden>
+    <div class="row">
+      <div><button id="refresh">Refresh data</button><button id="logout" class="secondary">Sign out</button></div>
+      <p id="status" class="status" role="status"></p>
+    </div>
+
+    <section>
+      <h2>Citizen reports</h2>
+      <div class="row">
+        <label>Status filter
+          <select id="reportFilter">
+            <option value="">All</option>
+            <option value="new">New</option>
+            <option value="reviewing">Reviewing</option>
+            <option value="fixed">Fixed</option>
+          </select>
+        </label>
+      </div>
+      <div id="reports"></div>
+    </section>
+
+    <section>
+      <h2>Guide editor</h2>
+      <div class="row">
+        <label>Guide
+          <select id="guideSelect"></select>
+        </label>
+        <div><button id="newGuide" class="secondary">New guide</button></div>
+      </div>
+      <label for="guideJson">Guide JSON</label>
+      <textarea id="guideJson" spellcheck="false"></textarea>
+      <button id="saveGuide">Save guide</button>
+      <button id="deleteGuide" class="danger">Delete selected guide</button>
+    </section>
+  </main>
+
+  <script>
+    const state = { token: sessionStorage.getItem('sahiAdminToken') || '', guides: [] };
+    const loginSection = document.querySelector('#loginSection');
+    const workspace = document.querySelector('#workspace');
+    const statusNode = document.querySelector('#status');
+    const guideSelect = document.querySelector('#guideSelect');
+    const guideJson = document.querySelector('#guideJson');
+
+    function setStatus(message, isError = false) {
+      statusNode.textContent = message;
+      statusNode.style.color = isError ? '#8b2525' : '#12622b';
+    }
+
+    async function api(path, options = {}) {
+      const headers = { ...(options.headers || {}) };
+      if (options.body) headers['Content-Type'] = 'application/json';
+      if (state.token && path.startsWith('/api/admin')) headers.Authorization = `Bearer ${state.token}`;
+      const response = await fetch(path, { ...options, headers });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.error || `Request failed (${response.status})`);
+      return data;
+    }
+
+    function editableGuide(guide) {
+      const copy = { ...guide };
+      delete copy.confirmations_30d;
+      delete copy.created_at;
+      delete copy.updated_at;
+      return copy;
+    }
+
+    function renderGuide() {
+      const guide = state.guides.find((item) => item.slug === guideSelect.value);
+      if (guide) guideJson.value = JSON.stringify(editableGuide(guide), null, 2);
+    }
+
+    function addText(parent, tag, text, className) {
+      const node = document.createElement(tag);
+      node.textContent = text;
+      if (className) node.className = className;
+      parent.append(node);
+      return node;
+    }
+
+    async function loadReports() {
+      const filter = document.querySelector('#reportFilter').value;
+      const reports = await api(`/api/admin/reports${filter ? `?status=${encodeURIComponent(filter)}` : ''}`);
+      const container = document.querySelector('#reports');
+      container.replaceChildren();
+      if (!reports.length) return addText(container, 'p', 'No reports found.', 'muted');
+      reports.forEach((report) => {
+        const article = document.createElement('article');
+        article.className = 'report';
+        addText(article, 'strong', `${report.guide_slug} · report #${report.id}`);
+        addText(article, 'p', report.message);
+        addText(article, 'p', `Visited: ${report.visited_on || 'not supplied'} · City: ${report.city || 'not supplied'} · Email: ${report.reporter_email || 'not supplied'}`, 'muted');
+        const select = document.createElement('select');
+        ['new', 'reviewing', 'fixed'].forEach((value) => {
+          const option = document.createElement('option');
+          option.value = option.textContent = value;
+          option.selected = value === report.status;
+          select.append(option);
+        });
+        select.addEventListener('change', async () => {
+          try {
+            await api(`/api/admin/reports/${report.id}`, { method: 'PATCH', body: JSON.stringify({ status: select.value }) });
+            setStatus(`Report #${report.id} updated.`);
+          } catch (error) { setStatus(error.message, true); }
+        });
+        article.append(select);
+        container.append(article);
+      });
+    }
+
+    async function loadGuides(selectedSlug) {
+      state.guides = await api('/api/guides');
+      guideSelect.replaceChildren();
+      state.guides.forEach((guide) => {
+        const option = document.createElement('option');
+        option.value = guide.slug;
+        option.textContent = `${guide.title} (${guide.slug})`;
+        guideSelect.append(option);
+      });
+      if (selectedSlug && state.guides.some((guide) => guide.slug === selectedSlug)) guideSelect.value = selectedSlug;
+      renderGuide();
+    }
+
+    async function refresh() {
+      try {
+        await Promise.all([loadReports(), loadGuides(guideSelect.value)]);
+        setStatus('Data refreshed.');
+      } catch (error) {
+        if (/token|required|authentication/i.test(error.message)) logout();
+        setStatus(error.message, true);
+      }
+    }
+
+    function logout() {
+      state.token = '';
+      sessionStorage.removeItem('sahiAdminToken');
+      workspace.hidden = true;
+      loginSection.hidden = false;
+    }
+
+    document.querySelector('#loginForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      try {
+        const data = await api('/api/admin/login', { method: 'POST', body: JSON.stringify({ password: document.querySelector('#password').value }) });
+        state.token = data.token;
+        sessionStorage.setItem('sahiAdminToken', data.token);
+        loginSection.hidden = true;
+        workspace.hidden = false;
+        await refresh();
+      } catch (error) { setStatus(error.message, true); }
+    });
+
+    guideSelect.addEventListener('change', renderGuide);
+    document.querySelector('#reportFilter').addEventListener('change', () => loadReports().catch((error) => setStatus(error.message, true)));
+    document.querySelector('#refresh').addEventListener('click', refresh);
+    document.querySelector('#logout').addEventListener('click', logout);
+    document.querySelector('#newGuide').addEventListener('click', () => {
+      guideSelect.value = '';
+      guideJson.value = JSON.stringify({
+        slug: 'new-guide', org: '', title: '', summary: '', last_verified: new Date().toISOString().slice(0, 10),
+        source_label: 'Official source', source_url: 'https://', fee: '', processing_time: '',
+        documents: [], steps: [{ title: '', detail: '' }], offices: [], hours: '', collection: '', tips: []
+      }, null, 2);
+    });
+    document.querySelector('#saveGuide').addEventListener('click', async () => {
+      try {
+        const guide = JSON.parse(guideJson.value);
+        const existing = state.guides.some((item) => item.slug === guide.slug);
+        const saved = await api(existing ? `/api/admin/guides/${encodeURIComponent(guide.slug)}` : '/api/admin/guides', {
+          method: existing ? 'PUT' : 'POST', body: JSON.stringify(guide)
+        });
+        await loadGuides(saved.slug);
+        setStatus(`Guide “${saved.title}” saved.`);
+      } catch (error) { setStatus(error.message, true); }
+    });
+    document.querySelector('#deleteGuide').addEventListener('click', async () => {
+      const slug = guideSelect.value;
+      if (!slug || !confirm(`Delete “${slug}” and its reports/confirmations?`)) return;
+      try {
+        await api(`/api/admin/guides/${encodeURIComponent(slug)}`, { method: 'DELETE' });
+        await Promise.all([loadGuides(), loadReports()]);
+        setStatus(`Guide “${slug}” deleted.`);
+      } catch (error) { setStatus(error.message, true); }
+    });
+
+    if (state.token) {
+      loginSection.hidden = true;
+      workspace.hidden = false;
+      refresh();
+    }
+  </script>
+</body>
+</html>

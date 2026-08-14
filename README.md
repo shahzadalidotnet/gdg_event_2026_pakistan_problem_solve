@@ -17,7 +17,24 @@ YouTube videos go stale and blogs never tell you *when* they were written. When 
 - **Vision & Roadmap** page describing how it scales into a self-maintaining service.
 
 ## Tech
-Pure **HTML + CSS + vanilla JS** in a single `index.html`. No build step, no backend, no dependencies — hosted on **GitHub Pages**. Hash routing gives each guide a shareable URL.
+Vanilla **HTML + CSS + JS** — no build step, no framework, no dependencies — hosted on **GitHub Pages**. Hash routing gives each guide a shareable URL. The code is split into small, single-responsibility modules:
+
+```
+index.html                 # markup only — links the stylesheet and scripts
+assets/
+  css/styles.css           # all styling (Pakistan @79 theme tokens)
+  img/og-cover.svg         # social share cover image
+  js/
+    config.js              # settings: ADMIN_EMAIL, API_BASE flag, TODAY
+    utils.js               # freshness + date helpers
+    data.js                # seed guide content (static source of truth / fallback)
+    api.js                 # data-access seam: static seed OR live backend + fallback
+    views.js               # rendering (home grid, guide detail, roadmap)
+    app.js                 # state, hash routing, bootstrap
+backend/                   # REST API + SQLite (separate service, in progress)
+```
+
+**Static ↔ live in one flag.** `api.js` is the only seam between the UI and its data. Leave `CONFIG.API_BASE` empty and the app runs fully static (seed data, email reports, local confirmations). Set it to the deployed backend origin and the same UI fetches live guides and posts real reports/confirmations — with automatic fallback to seed data if the API is unreachable, so a demo never breaks.
 
 ## Roadmap (see the in-app Vision & Roadmap page)
 1. **MVP (shipped)** — hand-verified, dated, sourced guides.

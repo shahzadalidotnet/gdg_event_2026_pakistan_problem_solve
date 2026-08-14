@@ -5,3 +5,11 @@
 
 # OS / editor cruft
 .DS_Store
+
+# Node / backend build artefacts
+node_modules/
+.pnpm-store/
+backend/node_modules/
+backend/data/*.db
+.env
+*.log

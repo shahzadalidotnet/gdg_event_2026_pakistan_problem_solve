@@ -1,0 +1,22 @@
+[
+  {
+    "slug": "sample-process",
+    "org": "Sample Government Office",
+    "title": "Sample Government Process",
+    "summary": "Replace this placeholder with a verified process guide before launch.",
+    "last_verified": "2026-01-01",
+    "source_label": "Official source",
+    "source_url": "https://www.pakistan.gov.pk/",
+    "fee": "Check with the relevant office",
+    "processing_time": "Varies",
+    "documents": ["CNIC", "Application form"],
+    "steps": [
+      {"title": "Prepare", "detail": "Collect the required documents."},
+      {"title": "Apply", "detail": "Visit the relevant government office."}
+    ],
+    "offices": ["Relevant local government office"],
+    "hours": "Confirm with the office before visiting",
+    "collection": "Collect from the office when notified",
+    "tips": ["Bring original documents and photocopies"]
+  }
+]

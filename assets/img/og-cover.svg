@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#013a19"/>
+      <stop offset="1" stop-color="#01411c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#e6b422"/>
+
+  <!-- faint grid -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <path d="M0 150 H1200 M0 300 H1200 M0 450 H1200"/>
+    <path d="M200 0 V630 M400 0 V630 M600 0 V630 M800 0 V630 M1000 0 V630"/>
+  </g>
+
+  <!-- logo mark -->
+  <g transform="translate(90,90)">
+    <rect width="96" height="96" rx="22" fill="#ffffff"/>
+    <path d="M28 50 l16 16 l30 -32" fill="none" stroke="#01411c" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="210" y="138" fill="#ffffff" font-size="46" font-weight="700">Sahi Tareeqa</text>
+  <text x="212" y="176" fill="#bfe0c8" font-size="24" font-weight="500">The right way to do it — dated &amp; sourced.</text>
+
+  <!-- headline -->
+  <text x="90" y="320" fill="#ffffff" font-size="72" font-weight="800" letter-spacing="-1">Verified Pakistani</text>
+  <text x="90" y="404" fill="#ffffff" font-size="72" font-weight="800" letter-spacing="-1">government processes.</text>
+
+  <!-- sub points -->
+  <g fill="#dff0e4" font-size="30" font-weight="600">
+    <text x="90" y="486">CNIC · Passport · Licence · HEC · FBR · IBCC · Domicile</text>
+  </g>
+  <text x="90" y="532" fill="#a9cdb5" font-size="24" font-weight="500">Every guide date-stamped, sourced, and community-verified.</text>
+
+  <!-- footer badge -->
+  <rect x="90" y="560" width="330" height="44" rx="22" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-opacity="0.3"/>
+  <text x="112" y="589" fill="#ffffff" font-size="22" font-weight="600">🇵🇰 Pakistan @79 · GDG Live Pakistan</text>
+
+  <!-- big translucent 79 -->
+  <text x="1150" y="470" text-anchor="end" fill="#ffffff" fill-opacity="0.08" font-size="360" font-weight="800">79</text>
+</svg>

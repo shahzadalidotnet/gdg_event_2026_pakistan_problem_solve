@@ -1,0 +1,23 @@
+{
+  "name": "sahi-tareeqa-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "REST API for verified Pakistani government process guides",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test:smoke": "./tests/curl-smoke.sh"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "nodemailer": "^7.0.5"
+  }
+}
