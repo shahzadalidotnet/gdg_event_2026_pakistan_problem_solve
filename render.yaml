@@ -1,0 +1,31 @@
+# Render Blueprint — deploys the Sahi Tareeqa backend API.
+# In Render: New → Blueprint → connect this repo. Render reads this file and
+# configures the service automatically. Free tier, auto-deploys on git push.
+#
+# Note: the free plan's disk is ephemeral (resets on redeploy / after the
+# service sleeps). Guides re-seed on boot from backend/seed/guides.json, so the
+# API always serves the 7 real guides. Reports/confirmations persist while the
+# instance is awake — fine for the demo. For durable storage later, attach a
+# Render Disk or move to Postgres.
+services:
+  - type: web
+    name: sahi-tareeqa-api
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/guides
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: ADMIN_EMAIL
+        value: shahzadalidotnet@gmail.com
+      # Admin API token — Render generates a strong random value and keeps it secret.
+      - key: ADMIN_TOKEN
+        generateValue: true
+      # SMTP is optional. Leave unset and the mailer logs reports to the service
+      # logs instead of sending email. To enable real emails, add SMTP_HOST,
+      # SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM in the Render dashboard.
