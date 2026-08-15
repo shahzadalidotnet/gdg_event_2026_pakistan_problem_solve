@@ -6,6 +6,7 @@ TEST_PORT="${TEST_PORT:-4101}"
 BASE_URL="http://localhost:${TEST_PORT}"
 ADMIN_TOKEN="smoke-test-token"
 ADMIN_PASSWORD="smoke-test-password"
+GUIDE_SLUG="cnic-renewal"
 TEMP_DIR="$(mktemp -d)"
 SERVER_PID=""
 
@@ -43,24 +44,24 @@ fi
 curl -fsS "$BASE_URL/admin/" | grep -q 'Sahi Tareeqa Admin'
 
 echo "GET /api/guides"
-curl -fsS "$BASE_URL/api/guides" | node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(!Array.isArray(x)||!x.length)process.exit(1)'
+curl -fsS "$BASE_URL/api/guides" | node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(!Array.isArray(x)||x.length!==7)process.exit(1)'
 
 echo "GET /api/guides/:slug"
-curl -fsS "$BASE_URL/api/guides/sample-process" | node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(x.slug!=="sample-process"||!Array.isArray(x.steps))process.exit(1)'
+curl -fsS "$BASE_URL/api/guides/$GUIDE_SLUG" | GUIDE_SLUG="$GUIDE_SLUG" node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(x.slug!==process.env.GUIDE_SLUG||!Array.isArray(x.steps))process.exit(1)'
 
 echo "POST /api/reports"
 REPORT_JSON="$(curl -fsS -X POST "$BASE_URL/api/reports" -H 'Content-Type: application/json' \
-  -d '{"guideSlug":"sample-process","message":"The fee shown at the office was different.","visitedOn":"2026-08-14","city":"Lahore","email":"citizen@example.com"}')"
+  -d "{\"guideSlug\":\"$GUIDE_SLUG\",\"message\":\"The fee shown at the office was different.\",\"visitedOn\":\"2026-08-14\",\"city\":\"Lahore\",\"email\":\"citizen@example.com\"}")"
 REPORT_ID="$(printf '%s' "$REPORT_JSON" | node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(!x.ok||!x.id)process.exit(1);process.stdout.write(String(x.id))')"
 grep -q '\[email fallback\]' "$TEMP_DIR/server.log"
 
 echo "POST /api/confirmations (freshness threshold)"
 for expected in 1 2 3 4 5; do
   curl -fsS -X POST "$BASE_URL/api/confirmations" -H 'Content-Type: application/json' \
-    -d '{"guideSlug":"sample-process"}' | EXPECTED="$expected" node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(!x.ok||x.count30d!==Number(process.env.EXPECTED))process.exit(1)'
+    -d "{\"guideSlug\":\"$GUIDE_SLUG\"}" | EXPECTED="$expected" node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(!x.ok||x.count30d!==Number(process.env.EXPECTED))process.exit(1)'
 done
 TODAY="$(date -u +%F)"
-curl -fsS "$BASE_URL/api/guides/sample-process" | TODAY="$TODAY" node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(x.confirmations_30d!==5||x.last_verified!==process.env.TODAY)process.exit(1)'
+curl -fsS "$BASE_URL/api/guides/$GUIDE_SLUG" | TODAY="$TODAY" node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(0));if(x.confirmations_30d!==5||x.last_verified!==process.env.TODAY)process.exit(1)'
 
 echo "Admin bearer token is required"
 UNAUTHORIZED_STATUS="$(curl -sS -o /dev/null -w '%{http_code}' "$BASE_URL/api/admin/reports")"

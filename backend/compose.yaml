@@ -1,0 +1,33 @@
+name: sahi-tareeqa
+
+services:
+  api:
+    image: sahi-tareeqa-api:local
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    init: true
+    read_only: true
+    ports:
+      - "${HOST_PORT:-4000}:4000"
+    environment:
+      PORT: "4000"
+      DB_PATH: /data/sahi.db
+      ADMIN_TOKEN: "${ADMIN_TOKEN:-local-admin-token}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-local-admin-password}"
+      ADMIN_EMAIL: "${ADMIN_EMAIL:-}"
+      SMTP_HOST: "${SMTP_HOST:-}"
+      SMTP_PORT: "${SMTP_PORT:-587}"
+      SMTP_SECURE: "${SMTP_SECURE:-false}"
+      SMTP_USER: "${SMTP_USER:-}"
+      SMTP_PASS: "${SMTP_PASS:-}"
+      SMTP_FROM: "${SMTP_FROM:-Sahi Tareeqa <no-reply@sahitareeqa.local>}"
+    volumes:
+      - sahi-data:/data
+    tmpfs:
+      - /tmp
+    stop_grace_period: 15s
+
+volumes:
+  sahi-data:
