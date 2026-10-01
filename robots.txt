@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shahzadalidotnet.github.io/gdg_event_2026_pakistan_problem_solve/sitemap.xml

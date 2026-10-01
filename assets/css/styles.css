@@ -210,6 +210,23 @@ ul.tips li svg { width:16px; height:16px; color:#b8860b; flex:none; margin-top:3
 .api-pill.on { display:inline-flex; }
 .api-pill .dot { width:8px; height:8px; border-radius:50%; background:var(--fresh); }
 
+/* Language toggle */
+.lang-toggle { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.4); border-radius:999px; padding:5px 14px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; line-height:1.4; }
+.lang-toggle:hover { background:rgba(255,255,255,.12); border-color:var(--gold); }
+
+/* Urdu / RTL support */
+:root[dir="rtl"] body {
+  font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Noto Naskh Arabic", "Geeza Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.9;
+}
+:root[dir="rtl"] .reality { border-left: 1px solid var(--gold); border-right: 5px solid var(--gold); }
+:root[dir="rtl"] .report-form { border-left: 1px solid var(--line); border-right: 4px solid var(--gold); }
+:root[dir="rtl"] .hero h2,
+:root[dir="rtl"] .detail-head h2,
+:root[dir="rtl"] .vision-hero h2 { letter-spacing: 0; line-height: 1.6; }
+/* Keep the Latin brand name / tagline rendering left-to-right inside RTL */
+:root[dir="rtl"] .brand h1, :root[dir="rtl"] .tagline { direction: ltr; }
+
 /* Footer */
 footer.site { border-top: 1px solid var(--line); background: #fff; margin-top: 20px; }
 .foot-inner { padding: 30px 20px; max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr; gap: 30px; }
