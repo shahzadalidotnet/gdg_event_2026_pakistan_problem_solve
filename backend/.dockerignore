@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+node_modules
+data
+*.db
+*.db-shm
+*.db-wal
+*.log
+README.md
+tests
+pnpm-lock.yaml
+pnpm-workspace.yaml
+compose*.yaml

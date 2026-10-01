@@ -237,3 +237,5 @@ const GUIDES_SEED = [
     ]
   }
 ];
+
+if (typeof module !== "undefined" && module.exports) module.exports = { GUIDES_SEED };

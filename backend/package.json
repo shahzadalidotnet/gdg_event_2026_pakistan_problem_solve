@@ -7,7 +7,11 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "test:smoke": "./tests/curl-smoke.sh"
+    "test:smoke": "./tests/curl-smoke.sh",
+    "test:docker": "./tests/docker-smoke.sh",
+    "docker:up": "docker compose up --build",
+    "docker:dev": "docker compose -f compose.yaml -f compose.dev.yaml up --build",
+    "docker:down": "docker compose down"
   },
   "engines": {
     "node": ">=18"

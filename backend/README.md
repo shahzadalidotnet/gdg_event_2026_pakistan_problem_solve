@@ -26,6 +26,45 @@ npm run test:smoke
 
 It starts a temporary server/database, exercises every required endpoint, verifies the five-confirmation freshness rule and admin authentication, and removes its temporary data afterward.
 
+## Run with Docker
+
+Docker Compose runs the API in a non-root, read-only Node 24 LTS container and stores SQLite in a named volume. No host Node.js installation is required.
+
+```bash
+cd backend
+cp .env.example .env
+# Replace the ADMIN_TOKEN and ADMIN_PASSWORD placeholders in .env.
+docker compose up --build
+```
+
+The API and admin page are available at `http://localhost:4000/api/health` and `http://localhost:4000/admin/`. Change `HOST_PORT` in `.env` if port 4000 is occupied.
+
+For live reload while editing `src/`, `seed/`, or `admin/`:
+
+```bash
+docker compose -f compose.yaml -f compose.dev.yaml up --build
+```
+
+Stop the containers while preserving SQLite data:
+
+```bash
+docker compose down
+```
+
+Delete the local SQLite volume and reseed from `seed/guides.json` on the next start:
+
+```bash
+docker compose down --volumes
+```
+
+Run the isolated container smoke test on port 4102:
+
+```bash
+./tests/docker-smoke.sh
+```
+
+The smoke test builds the image, verifies health and all seven seeded guides, stores a report, restarts the API to prove SQLite volume persistence, verifies admin login, and removes its temporary Compose project and volume.
+
 ## Configuration
 
 | Variable | Required | Purpose |
@@ -71,7 +110,7 @@ TOKEN=replace-with-your-admin-token
 curl "$API/api/guides"
 
 # One guide
-curl "$API/api/guides/sample-process"
+curl "$API/api/guides/cnic-renewal"
 ```
 
 ### Submit an outdated report
@@ -80,7 +119,7 @@ curl "$API/api/guides/sample-process"
 curl -X POST "$API/api/reports" \
   -H 'Content-Type: application/json' \
   -d '{
-    "guideSlug": "sample-process",
+    "guideSlug": "cnic-renewal",
     "message": "The office requested a different fee.",
     "visitedOn": "2026-08-14",
     "city": "Lahore",
@@ -95,7 +134,7 @@ curl -X POST "$API/api/reports" \
 ```bash
 curl -X POST "$API/api/confirmations" \
   -H 'Content-Type: application/json' \
-  -d '{"guideSlug":"sample-process"}'
+  -d '{"guideSlug":"cnic-renewal"}'
 ```
 
 ### Admin login

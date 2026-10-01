@@ -1,0 +1,12 @@
+services:
+  api:
+    build:
+      target: development
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "src/server.js"]
+    volumes:
+      - sahi-data:/data
+      - ./src:/app/src:ro
+      - ./seed:/app/seed:ro
+      - ./admin:/app/admin:ro
